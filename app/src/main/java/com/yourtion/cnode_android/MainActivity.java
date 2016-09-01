@@ -71,9 +71,18 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_all) {
             // Handle the camera action
-            client.getTopics("", 0, 0);
+            client.getTopics("", 0, 0, new CNodeClient.Callback() {
+                @Override
+                public void success(Object res) {
+
+                }
+
+                @Override
+                public void fail() {
+
+                }
+            });
         } else if (id == R.id.nav_essence) {
-            client.getTopic("5433d5e4e737cbe96dcef312");
         } else if (id == R.id.nav_faq) {
 
         } else if (id == R.id.nav_jobs) {

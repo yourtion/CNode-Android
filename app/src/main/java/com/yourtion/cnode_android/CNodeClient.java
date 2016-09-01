@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -26,12 +25,17 @@ public class CNodeClient {
     private static final String HOST = "https://cnodejs.org/api/v1";
     private OkHttpClient okHttpClient = new OkHttpClient();
 
-    public void getTopics(String tab, Number page, Number limit) {
+    public interface Callback{
+        public abstract void success(Object res);
+        public abstract void fail();
+    }
+
+    public void getTopics(String tab, Number page, Number limit,  final Callback callback) {
         Request request = new Request.Builder().
                 url(HOST + "/topics").
                 get().
                 build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
+        okHttpClient.newCall(request).enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 
@@ -50,20 +54,22 @@ public class CNodeClient {
                         }
                     }
                     Log.e(TAG, topics.toString());
+                    callback.success(topics);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    callback.fail();
                 }
 
             }
         });
     }
 
-    public void getTopic(String id) {
+    public void getTopic(String id, final Callback callbak) {
         Request request = new Request.Builder().
                 url(HOST + "/topic/" + id).
                 get().
                 build();
-        okHttpClient.newCall(request).enqueue(new Callback() {
+        okHttpClient.newCall(request).enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 
@@ -76,8 +82,10 @@ public class CNodeClient {
                     JSONObject json = new JSONObject(resStr);
                     Topic topic = new Topic(json.getJSONObject("data"));
                     Log.e(TAG, topic.toString());
+                    callbak.success(topic);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    callbak.fail();
                 }
 
             }

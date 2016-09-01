@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_all) {
             // Handle the camera action
+            CNodeClient client = new CNodeClient();
+            client.getTopics("", 0, 0);
         } else if (id == R.id.nav_essence) {
 
         } else if (id == R.id.nav_faq) {

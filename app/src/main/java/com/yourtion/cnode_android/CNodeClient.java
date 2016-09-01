@@ -53,7 +53,7 @@ public class CNodeClient {
                             topics.add(new Topic(arr.getJSONObject(i)));
                         }
                     }
-                    Log.e(TAG, topics.toString());
+                    Log.d(TAG, topics.toString());
                     callback.success(topics);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -81,7 +81,7 @@ public class CNodeClient {
                 try {
                     JSONObject json = new JSONObject(resStr);
                     Topic topic = new Topic(json.getJSONObject("data"));
-                    Log.e(TAG, topic.toString());
+                    Log.d(TAG, topic.toString());
                     callbak.success(topic);
                 } catch (JSONException e) {
                     e.printStackTrace();

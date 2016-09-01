@@ -9,9 +9,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+
+import com.yourtion.cnode_android.Modules.Topic;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ListView mListView;
+    private ArrayList<Topic> mTopics;
+    private ArrayList<HashMap<String, String>> mListData;
+    private SimpleAdapter mSimpleAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +40,21 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mListView = (ListView) findViewById(R.id.TopicList);
+
+        mListData = new ArrayList<HashMap<String, String>>();
+
+        //生成适配器，数组===》ListItem
+        mSimpleAdapter = new SimpleAdapter(this, //没什么解释
+                mListData,//数据来源
+                R.layout.topic_list_item,//ListItem的XML实现
+                new String[]{"ItemTitle", "ItemText"},
+                //ListItem的XML文件里面的两个TextView ID
+                new int[]{R.id.ItemTitle, R.id.ItemText});
+        //添加并且显示
+        mListView.setAdapter(mSimpleAdapter);
+
     }
 
     @Override
@@ -74,6 +101,20 @@ public class MainActivity extends AppCompatActivity
             client.getTopics("", 0, 0, new CNodeClient.Callback() {
                 @Override
                 public void success(Object res) {
+                    mTopics = (ArrayList<Topic>) res;
+                    for (int i = 0; i < mTopics.size(); i++) {
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        Topic topic = mTopics.get(i);
+                        map.put("ItemTitle", topic.getTitle());
+                        map.put("ItemText", topic.getAuthorId());
+                        mListData.add(map);
+                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mSimpleAdapter.notifyDataSetChanged();
+                        }
+                    });
 
                 }
 

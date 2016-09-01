@@ -67,13 +67,13 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        CNodeClient client = new CNodeClient();
 
         if (id == R.id.nav_all) {
             // Handle the camera action
-            CNodeClient client = new CNodeClient();
             client.getTopics("", 0, 0);
         } else if (id == R.id.nav_essence) {
-
+            client.getTopic("5433d5e4e737cbe96dcef312");
         } else if (id == R.id.nav_faq) {
 
         } else if (id == R.id.nav_jobs) {

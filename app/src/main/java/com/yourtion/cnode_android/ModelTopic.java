@@ -19,6 +19,8 @@ import java.util.Locale;
 
 public class ModelTopic {
 
+    private static final String TAG = "CNodeModelTopic";
+
     private static final String JSON_ID = "id";
     private static final String JSON_AUTHOR_ID = "author_id";
     private static final String JSON_TAB = "tab";
@@ -33,7 +35,7 @@ public class ModelTopic {
     private static final String JSON_AUTHOR = "author";
     private static final String JSON_REPLIES = "replies";
 
-    private static final String JSON_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    public static final String JSON_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
     public String mTopicId;
     public String mAuthorId;
@@ -47,7 +49,7 @@ public class ModelTopic {
     public Number mVisitCount;
     public Date mCreateAt;
     public ModelAuthor mAuthor;
-    public ArrayList<ModelReplie> mModelReplies;
+    public ArrayList<ModelReplie> mReplies;
 
     public ModelTopic(JSONObject json) throws JSONException {
 
@@ -66,7 +68,7 @@ public class ModelTopic {
             mLastReplyAt = df.parse(json.getString(JSON_LAST_REPLY_AT));
             mCreateAt = df.parse(json.getString(JSON_CREATE_AT));
         } catch (ParseException ignored) {
-            Log.e("EREEE", ignored.toString());
+            Log.e(TAG, ignored.toString());
         }
 
 
@@ -75,11 +77,11 @@ public class ModelTopic {
         }
 
         if (json.has(JSON_REPLIES)) {
-            mModelReplies = new ArrayList<>();
+            mReplies = new ArrayList<>();
             JSONArray jArray = json.getJSONArray(JSON_REPLIES);
             if (jArray != null) {
                 for (int i = 0; i < jArray.length(); i++) {
-                    mModelReplies.add(new ModelReplie(jArray.getJSONObject(i)));
+                    mReplies.add(new ModelReplie(jArray.getJSONObject(i)));
                 }
             }
         }
@@ -181,12 +183,12 @@ public class ModelTopic {
         mAuthor = author;
     }
 
-    public ArrayList<ModelReplie> getModelReplies() {
-        return mModelReplies;
+    public ArrayList<ModelReplie> getReplies() {
+        return mReplies;
     }
 
-    public void setModelReplies(ArrayList<ModelReplie> modelReplies) {
-        mModelReplies = modelReplies;
+    public void setReplies(ArrayList<ModelReplie> modelReplies) {
+        mReplies = modelReplies;
     }
 }
 
@@ -222,14 +224,14 @@ class ModelAuthor {
 
 class ModelReplie {
 
+    private static final String TAG = "CNodeModelTopic";
+
     private static final String JSON_ID = "id";
     private static final String JSON_AUTHOR = "author";
     private static final String JSON_CONTENT = "content";
     private static final String JSON_UP = "ups";
     private static final String JSON_CREATE_AT = "create_at";
     private static final String JSON_REPLY_ID = "reply_id";
-
-    private static final String JSON_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
     public String mReplieId;
     public ModelAuthor mAuthor;
@@ -240,7 +242,7 @@ class ModelReplie {
 
     public ModelReplie(JSONObject json) throws JSONException {
 
-        DateFormat df = new SimpleDateFormat(JSON_DATE_FORMAT, Locale.CHINA);
+        DateFormat df = new SimpleDateFormat(ModelTopic.JSON_DATE_FORMAT, Locale.CHINA);
 
         mReplieId = json.getString(JSON_ID);
         mAuthor = new ModelAuthor(json.getJSONObject(JSON_AUTHOR));
@@ -249,6 +251,7 @@ class ModelReplie {
         try {
             mCreateAt = df.parse(json.getString(JSON_CREATE_AT));
         } catch (ParseException ignored) {
+            Log.e(TAG, ignored.toString());
         }
 
         mUps = new ArrayList<>();

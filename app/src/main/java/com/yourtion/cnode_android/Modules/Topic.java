@@ -1,4 +1,4 @@
-package com.yourtion.cnode_android;
+package com.yourtion.cnode_android.Modules;
 
 import android.util.Log;
 
@@ -17,7 +17,7 @@ import java.util.Locale;
  * Created by Yourtion on 9/1/16.
  */
 
-public class ModelTopic {
+public class Topic {
 
     private static final String TAG = "CNodeModelTopic";
 
@@ -48,10 +48,10 @@ public class ModelTopic {
     public Number mReplyCount;
     public Number mVisitCount;
     public Date mCreateAt;
-    public ModelAuthor mAuthor;
-    public ArrayList<ModelReplie> mReplies;
+    public Author mAuthor;
+    public ArrayList<Replie> mReplies;
 
-    public ModelTopic(JSONObject json) throws JSONException {
+    public Topic(JSONObject json) throws JSONException {
 
         DateFormat df = new SimpleDateFormat(JSON_DATE_FORMAT, Locale.CHINA);
 
@@ -73,7 +73,7 @@ public class ModelTopic {
 
 
         if (json.has(JSON_AUTHOR)) {
-            mAuthor = new ModelAuthor(json.getJSONObject(JSON_AUTHOR));
+            mAuthor = new Author(json.getJSONObject(JSON_AUTHOR));
         }
 
         if (json.has(JSON_REPLIES)) {
@@ -81,7 +81,7 @@ public class ModelTopic {
             JSONArray jArray = json.getJSONArray(JSON_REPLIES);
             if (jArray != null) {
                 for (int i = 0; i < jArray.length(); i++) {
-                    mReplies.add(new ModelReplie(jArray.getJSONObject(i)));
+                    mReplies.add(new Replie(jArray.getJSONObject(i)));
                 }
             }
         }
@@ -175,131 +175,20 @@ public class ModelTopic {
         mCreateAt = createAt;
     }
 
-    public ModelAuthor getAuthor() {
+    public Author getAuthor() {
         return mAuthor;
     }
 
-    public void setAuthor(ModelAuthor author) {
+    public void setAuthor(Author author) {
         mAuthor = author;
     }
 
-    public ArrayList<ModelReplie> getReplies() {
+    public ArrayList<Replie> getReplies() {
         return mReplies;
     }
 
-    public void setReplies(ArrayList<ModelReplie> modelReplies) {
-        mReplies = modelReplies;
+    public void setReplies(ArrayList<Replie> replies) {
+        mReplies = replies;
     }
 }
 
-class ModelAuthor {
-
-    private static final String JSON_LOGINNAME = "loginname";
-    private static final String JSON_AVATAR_URL = "avatar_url";
-
-    public String mLoginname;
-    public String mAvatarUrl;
-
-    public ModelAuthor(JSONObject json) throws JSONException {
-        mLoginname = json.getString(JSON_LOGINNAME);
-        mAvatarUrl = json.getString(JSON_AVATAR_URL);
-    }
-
-    public String getLoginname() {
-        return mLoginname;
-    }
-
-    public void setLoginname(String loginname) {
-        mLoginname = loginname;
-    }
-
-    public String getAvatarUrl() {
-        return mAvatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        mAvatarUrl = avatarUrl;
-    }
-}
-
-class ModelReplie {
-
-    private static final String TAG = "CNodeModelTopic";
-
-    private static final String JSON_ID = "id";
-    private static final String JSON_AUTHOR = "author";
-    private static final String JSON_CONTENT = "content";
-    private static final String JSON_UP = "ups";
-    private static final String JSON_CREATE_AT = "create_at";
-    private static final String JSON_REPLY_ID = "reply_id";
-
-    public String mReplieId;
-    public ModelAuthor mAuthor;
-    public String mContent;
-    public ArrayList<String> mUps;
-    public Date mCreateAt;
-    public String mReplyId;
-
-    public ModelReplie(JSONObject json) throws JSONException {
-
-        DateFormat df = new SimpleDateFormat(ModelTopic.JSON_DATE_FORMAT, Locale.CHINA);
-
-        mReplieId = json.getString(JSON_ID);
-        mAuthor = new ModelAuthor(json.getJSONObject(JSON_AUTHOR));
-        mContent = json.getString(JSON_CONTENT);
-        mReplyId = json.getString(JSON_REPLY_ID);
-        try {
-            mCreateAt = df.parse(json.getString(JSON_CREATE_AT));
-        } catch (ParseException ignored) {
-            Log.e(TAG, ignored.toString());
-        }
-
-        mUps = new ArrayList<>();
-        JSONArray jArray = json.getJSONArray(JSON_UP);
-        if (jArray != null) {
-            for (int i = 0; i < jArray.length(); i++) {
-                mUps.add(jArray.get(i).toString());
-            }
-        }
-    }
-
-    public String getReplieId() {
-        return mReplieId;
-    }
-
-    public void setReplieId(String replieId) {
-        mReplieId = replieId;
-    }
-
-    public ModelAuthor getAuthor() {
-        return mAuthor;
-    }
-
-    public void setAuthor(ModelAuthor author) {
-        mAuthor = author;
-    }
-
-    public ArrayList<String> getUps() {
-        return mUps;
-    }
-
-    public void setUps(ArrayList<String> ups) {
-        mUps = ups;
-    }
-
-    public Date getCreateAt() {
-        return mCreateAt;
-    }
-
-    public void setCreateAt(Date createAt) {
-        mCreateAt = createAt;
-    }
-
-    public String getReplyId() {
-        return mReplyId;
-    }
-
-    public void setReplyId(String replyId) {
-        mReplyId = replyId;
-    }
-}

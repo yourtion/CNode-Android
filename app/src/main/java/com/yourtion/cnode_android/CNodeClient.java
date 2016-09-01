@@ -2,6 +2,8 @@ package com.yourtion.cnode_android;
 
 import android.util.Log;
 
+import com.yourtion.cnode_android.Modules.Topic;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,10 +43,10 @@ public class CNodeClient {
                 try {
                     JSONObject json = new JSONObject(resStr);
                     JSONArray arr = json.getJSONArray("data");
-                    ArrayList<ModelTopic> topics = new ArrayList<>();
+                    ArrayList<Topic> topics = new ArrayList<>();
                     if (arr != null) {
                         for (int i = 0; i < arr.length(); i++) {
-                            topics.add(new ModelTopic(arr.getJSONObject(i)));
+                            topics.add(new Topic(arr.getJSONObject(i)));
                         }
                     }
                     Log.e(TAG, topics.toString());
@@ -72,7 +74,7 @@ public class CNodeClient {
                 String resStr = response.body().string();
                 try {
                     JSONObject json = new JSONObject(resStr);
-                    ModelTopic topic = new ModelTopic(json.getJSONObject("data"));
+                    Topic topic = new Topic(json.getJSONObject("data"));
                     Log.e(TAG, topic.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();

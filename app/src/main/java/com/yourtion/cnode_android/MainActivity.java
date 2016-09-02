@@ -49,11 +49,38 @@ public class MainActivity extends AppCompatActivity
         mSimpleAdapter = new SimpleAdapter(this, //没什么解释
                 mListData,//数据来源
                 R.layout.topic_list_item,//ListItem的XML实现
-                new String[]{"ItemTitle", "ItemText"},
+                new String[]{"title", "author"},
                 //ListItem的XML文件里面的两个TextView ID
-                new int[]{R.id.ItemTitle, R.id.ItemText});
+                new int[]{R.id.list_item_title, R.id.list_item_time});
         //添加并且显示
         mListView.setAdapter(mSimpleAdapter);
+
+        CNodeClient client = new CNodeClient();
+        client.getTopics("", 0, 0, new CNodeClient.Callback() {
+            @Override
+            public void success(Object res) {
+                mTopics = (ArrayList<Topic>) res;
+                for (int i = 0; i < mTopics.size(); i++) {
+                    HashMap<String, String> map = new HashMap<String, String>();
+                    Topic topic = mTopics.get(i);
+                    map.put("title", topic.getTitle());
+                    map.put("author", topic.getAuthorId());
+                    mListData.add(map);
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSimpleAdapter.notifyDataSetChanged();
+                    }
+                });
+
+            }
+
+            @Override
+            public void fail() {
+
+            }
+        });
 
     }
 
@@ -94,35 +121,10 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        CNodeClient client = new CNodeClient();
+
 
         if (id == R.id.nav_all) {
             // Handle the camera action
-            client.getTopics("", 0, 0, new CNodeClient.Callback() {
-                @Override
-                public void success(Object res) {
-                    mTopics = (ArrayList<Topic>) res;
-                    for (int i = 0; i < mTopics.size(); i++) {
-                        HashMap<String, String> map = new HashMap<String, String>();
-                        Topic topic = mTopics.get(i);
-                        map.put("ItemTitle", topic.getTitle());
-                        map.put("ItemText", topic.getAuthorId());
-                        mListData.add(map);
-                    }
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mSimpleAdapter.notifyDataSetChanged();
-                        }
-                    });
-
-                }
-
-                @Override
-                public void fail() {
-
-                }
-            });
         } else if (id == R.id.nav_essence) {
         } else if (id == R.id.nav_faq) {
 

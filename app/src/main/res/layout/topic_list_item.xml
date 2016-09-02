@@ -3,20 +3,83 @@
               android:id="@+id/TopicList"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:layout_margin="5dp"
               android:orientation="vertical"
-              android:paddingBottom="3dip"
-              android:paddingLeft="10dip">
+              android:padding="6dp">
 
-    <TextView
-        android:id="@+id/ItemTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-    </TextView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
 
-    <TextView
-        android:id="@+id/ItemText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-    </TextView>
+        <TextView
+            android:id="@+id/list_item_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTag"
+            android:padding="3dp"
+            android:text="置顶"
+            android:textColor="@color/colorTagText">
+        </TextView>
+
+        <TextView
+            android:id="@+id/list_item_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="1dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:singleLine="true"
+            android:text="【杭州】 Node Party Github 资料库现已建立，欢迎 watch/star 并持续关注活动信息"
+            android:textSize="16sp">
+        </TextView>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp">
+
+
+        <TextView
+            android:id="@+id/list_item_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="20 / 3299"
+            android:textColor="@color/colorTextSmall"
+            android:textSize="12sp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/list_item_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/list_item_time"
+            android:layout_toStartOf="@+id/list_item_time"
+            android:text="xinyu198736"
+            android:textColor="@color/colorTextSmall"
+            android:textSize="12sp">
+        </TextView>
+
+        <TextView
+            android:id="@+id/list_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="3 个月前"
+            android:textColor="@color/colorTextSmall"
+            android:textSize="12sp">
+        </TextView>
+    </RelativeLayout>
+
 
 </LinearLayout>

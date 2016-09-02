@@ -31,10 +31,13 @@ public class CNodeClient {
     }
 
     public void getTopics(String tab, Number page, Number limit,  final Callback callback) {
-        Request request = new Request.Builder().
-                url(HOST + "/topics").
-                get().
-                build();
+        String url = HOST + "/topics";
+        if (!tab.equals("")) {
+            url = url + "?tab=" + tab;
+        }
+        Log.d(TAG, url);
+        Request request = new Request.Builder().url(url).get().build();
+
         okHttpClient.newCall(request).enqueue(new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity
     private ListView mListView;
     private ArrayList<Topic> mTopics;
     private CNodeListAdapter mListAdapter;
+    private CNodeClient client = new CNodeClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,14 @@ public class MainActivity extends AppCompatActivity
         mListAdapter = new CNodeListAdapter(this, mTopics);
         mListView.setAdapter(mListAdapter);
 
-        CNodeClient client = new CNodeClient();
-        client.getTopics("", 0, 0, new CNodeClient.Callback() {
+        loadData("");
+    }
+
+    public void loadData(String channal) {
+        if (channal == null) {
+            channal = "";
+        }
+        client.getTopics(channal, 0, 0, new CNodeClient.Callback() {
             @Override
             public void success(Object res) {
                 mTopics = (ArrayList<Topic>) res;
@@ -64,7 +71,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-
     }
 
     @Override
@@ -105,16 +111,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
         if (id == R.id.nav_all) {
-            // Handle the camera action
+            loadData("");
         } else if (id == R.id.nav_essence) {
+            loadData("good");
         } else if (id == R.id.nav_faq) {
-
+            loadData("ask");
         } else if (id == R.id.nav_jobs) {
-
+            loadData("job");
         } else if (id == R.id.nav_share) {
-
+            loadData("share");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

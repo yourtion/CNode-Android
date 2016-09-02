@@ -19,8 +19,8 @@ import java.util.Locale;
 
 public class Topic {
 
+    public static final String JSON_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     private static final String TAG = "CNodeModelTopic";
-
     private static final String JSON_ID = "id";
     private static final String JSON_AUTHOR_ID = "author_id";
     private static final String JSON_TAB = "tab";
@@ -34,9 +34,6 @@ public class Topic {
     private static final String JSON_CREATE_AT = "create_at";
     private static final String JSON_AUTHOR = "author";
     private static final String JSON_REPLIES = "replies";
-
-    public static final String JSON_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
-
     public String mTopicId;
     public String mAuthorId;
     public String mTab;
@@ -150,7 +147,7 @@ public class Topic {
     public String getTabString() {
         if (this.mTop) return "置顶";
         if (this.mGood) return "精华";
-        switch (this.mTab){
+        switch (this.mTab) {
             case "share":
                 return "分享";
             case "job":

@@ -4,8 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBackground">#E1E1E1</color>
-    <color name="colorTag">#80bd01</color>
-    <color name="colorTagText">#FFFFFF</color>
+    <color name="colorTag">#E5E5E5</color>
+    <color name="colorTagText">#999999</color>
+    <color name="colorTagH">#80bd01</color>
+    <color name="colorTagTextH">#FFFFFF</color>
     <color name="colorTextSmall">#778087</color>
 
 </resources>

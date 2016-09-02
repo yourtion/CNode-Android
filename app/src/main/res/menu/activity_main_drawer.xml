@@ -7,7 +7,7 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="全部"/>
         <item
-            android:id="@+id/nav_essence"
+            android:id="@+id/nav_good"
             android:icon="@drawable/ic_menu_gallery"
             android:title="精华"/>
         <item
@@ -15,11 +15,11 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="分享"/>
         <item
-            android:id="@+id/nav_faq"
+            android:id="@+id/nav_ask"
             android:icon="@drawable/ic_menu_manage"
             android:title="问答"/>
         <item
-            android:id="@+id/nav_jobs"
+            android:id="@+id/nav_job"
             android:icon="@drawable/ic_menu_manage"
             android:title="招聘"/>
     </group>

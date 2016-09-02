@@ -111,13 +111,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        mListAdapter.setTagVisable(false);
+
         if (id == R.id.nav_all) {
             loadData("");
-        } else if (id == R.id.nav_essence) {
+            mListAdapter.setTagVisable(true);
+        } else if (id == R.id.nav_good) {
             loadData("good");
-        } else if (id == R.id.nav_faq) {
+        } else if (id == R.id.nav_ask) {
             loadData("ask");
-        } else if (id == R.id.nav_jobs) {
+        } else if (id == R.id.nav_job) {
             loadData("job");
         } else if (id == R.id.nav_share) {
             loadData("share");

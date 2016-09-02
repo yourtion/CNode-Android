@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class CNodeListAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<Topic> mTopics;
+    private Boolean mTagVisable = true;
 
     public CNodeListAdapter(Context context, ArrayList<Topic> topics) {
         this.mContext = context;
@@ -25,6 +26,10 @@ public class CNodeListAdapter extends BaseAdapter {
 
     public void setTopics(ArrayList<Topic> topics) {
         mTopics = topics;
+    }
+
+    public void setTagVisable(Boolean tagVisable) {
+        mTagVisable = tagVisable;
     }
 
     @Override
@@ -64,16 +69,24 @@ public class CNodeListAdapter extends BaseAdapter {
 
         Topic topic = mTopics.get(position);
         String tab_string = topic.getTabString();
-
-        if(topic.mTop || topic.mGood) {
-            holder.tab.setBackgroundColor(mContext.getResources().getColor(R.color.colorTagH));
-            holder.tab.setTextColor(mContext.getResources().getColor(R.color.colorTagTextH));
+        if (tab_string != null) {
+            holder.tab.setText(tab_string);
         }
-        if(tab_string != null) {
-            holder.tab.setText(topic.getTabString());
+
+        if (mTagVisable && tab_string != null) {
+            holder.tab.setVisibility(View.VISIBLE);
         } else {
             holder.tab.setVisibility(View.GONE);
         }
+        if (topic.mTop || topic.mGood) {
+            holder.tab.setVisibility(View.VISIBLE);
+            holder.tab.setBackgroundColor(mContext.getResources().getColor(R.color.colorTagH));
+            holder.tab.setTextColor(mContext.getResources().getColor(R.color.colorTagTextH));
+        } else {
+            holder.tab.setBackgroundColor(mContext.getResources().getColor(R.color.colorTag));
+            holder.tab.setTextColor(mContext.getResources().getColor(R.color.colorTagText));
+        }
+
 
         holder.title.setText(topic.getTitle());
         holder.count.setText(topic.getCountText());

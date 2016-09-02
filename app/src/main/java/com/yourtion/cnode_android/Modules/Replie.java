@@ -16,7 +16,7 @@ import java.util.Locale;
 /**
  * Created by Yourtion on 9/1/16.
  */
-class Replie {
+public class Replie {
 
     private static final String TAG = "CNodeModelTopic";
 
@@ -61,39 +61,23 @@ class Replie {
         return mReplieId;
     }
 
-    public void setReplieId(String replieId) {
-        mReplieId = replieId;
-    }
-
     public Author getAuthor() {
         return mAuthor;
     }
 
-    public void setAuthor(Author author) {
-        mAuthor = author;
+    public String getContent() {
+        return mContent;
     }
 
     public ArrayList<String> getUps() {
         return mUps;
     }
 
-    public void setUps(ArrayList<String> ups) {
-        mUps = ups;
-    }
-
     public Date getCreateAt() {
         return mCreateAt;
     }
 
-    public void setCreateAt(Date createAt) {
-        mCreateAt = createAt;
-    }
-
     public String getReplyId() {
         return mReplyId;
-    }
-
-    public void setReplyId(String replyId) {
-        mReplyId = replyId;
     }
 }

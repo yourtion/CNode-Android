@@ -6,7 +6,7 @@ import org.json.JSONObject;
 /**
  * Created by Yourtion on 9/1/16.
  */
-class Author {
+public class Author {
 
     private static final String JSON_LOGINNAME = "loginname";
     private static final String JSON_AVATAR_URL = "avatar_url";
@@ -23,15 +23,8 @@ class Author {
         return mLoginname;
     }
 
-    public void setLoginname(String loginname) {
-        mLoginname = loginname;
-    }
-
     public String getAvatarUrl() {
         return mAvatarUrl;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
-        mAvatarUrl = avatarUrl;
-    }
 }

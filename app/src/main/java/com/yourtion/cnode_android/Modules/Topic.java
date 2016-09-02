@@ -91,104 +91,75 @@ public class Topic {
         return mTopicId;
     }
 
-    public void setTopicId(String topicId) {
-        mTopicId = topicId;
-    }
-
     public String getAuthorId() {
         return mAuthorId;
-    }
-
-    public void setAuthorId(String authorId) {
-        mAuthorId = authorId;
     }
 
     public String getTab() {
         return mTab;
     }
 
-    public void setTab(String tab) {
-        mTab = tab;
-    }
-
     public String getContent() {
         return mContent;
-    }
-
-    public void setContent(String content) {
-        mContent = content;
     }
 
     public String getTitle() {
         return mTitle;
     }
 
-    public void setTitle(String title) {
-        mTitle = title;
-    }
-
     public Date getLastReplyAt() {
         return mLastReplyAt;
-    }
-
-    public void setLastReplyAt(Date lastReplyAt) {
-        mLastReplyAt = lastReplyAt;
     }
 
     public Boolean getGood() {
         return mGood;
     }
 
-    public void setGood(Boolean good) {
-        mGood = good;
-    }
-
     public Boolean getTop() {
         return mTop;
-    }
-
-    public void setTop(Boolean top) {
-        mTop = top;
     }
 
     public Number getReplyCount() {
         return mReplyCount;
     }
 
-    public void setReplyCount(Number replyCount) {
-        mReplyCount = replyCount;
-    }
-
     public Number getVisitCount() {
         return mVisitCount;
-    }
-
-    public void setVisitCount(Number visitCount) {
-        mVisitCount = visitCount;
     }
 
     public Date getCreateAt() {
         return mCreateAt;
     }
 
-    public void setCreateAt(Date createAt) {
-        mCreateAt = createAt;
-    }
-
     public Author getAuthor() {
         return mAuthor;
-    }
-
-    public void setAuthor(Author author) {
-        mAuthor = author;
     }
 
     public ArrayList<Replie> getReplies() {
         return mReplies;
     }
 
-    public void setReplies(ArrayList<Replie> replies) {
-        mReplies = replies;
+    public String getCountText() {
+        StringBuilder countText = new StringBuilder();
+        countText.append(this.getReplyCount());
+        countText.append(" / ");
+        countText.append(this.getVisitCount());
+        return countText.toString();
+    }
+
+    public String getTabString() {
+        if (this.mTop) return "置顶";
+        if (this.mGood) return "精华";
+        switch (this.mTab){
+            case "share":
+                return "分享";
+            case "job":
+                return "招聘";
+            case "ask":
+                return "问答";
+            default:
+                return null;
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 package com.yourtion.cnode_android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.yourtion.cnode_android.Modules.Topic;
@@ -40,10 +43,17 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mListView = (ListView) findViewById(R.id.TopicList);
-
-
         mListAdapter = new CNodeListAdapter(this, mTopics);
         mListView.setAdapter(mListAdapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Topic topic = mListAdapter.getItem(position);
+                Intent i = new Intent(getApplicationContext(), ContentActivity.class);
+                startActivity(i);
+            }
+        });
 
         loadData("");
     }

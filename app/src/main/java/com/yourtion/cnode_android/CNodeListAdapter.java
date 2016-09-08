@@ -39,7 +39,7 @@ public class CNodeListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Topic getItem(int position) {
         return mTopics.get(position);
     }
 

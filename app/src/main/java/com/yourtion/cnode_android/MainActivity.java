@@ -8,12 +8,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.yourtion.cnode_android.Modules.Topic;
 
@@ -21,6 +21,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public final static String TOPIC_KEY = "com.yourtion.cnode_android.topic";
 
     private ListView mListView;
     private ArrayList<Topic> mTopics;
@@ -52,6 +54,9 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Topic topic = mListAdapter.getItem(position);
                 Intent i = new Intent(getApplicationContext(), ContentActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable(TOPIC_KEY, topic);
+                i.putExtras(mBundle);
                 startActivity(i);
             }
         });
@@ -79,7 +84,12 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void fail() {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "网络请求失败", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
     }

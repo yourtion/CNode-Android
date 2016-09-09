@@ -3,10 +3,12 @@ package com.yourtion.cnode_android.Modules;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * Created by Yourtion on 9/1/16.
  */
-public class Author {
+public class Author implements Serializable {
 
     private static final String JSON_LOGINNAME = "loginname";
     private static final String JSON_AVATAR_URL = "avatar_url";

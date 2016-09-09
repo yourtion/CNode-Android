@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,8 +17,7 @@ import java.util.Locale;
 /**
  * Created by Yourtion on 9/1/16.
  */
-public class Replie {
-
+public class Replie implements Serializable {
     private static final String TAG = "CNodeModelTopic";
 
     private static final String JSON_ID = "id";

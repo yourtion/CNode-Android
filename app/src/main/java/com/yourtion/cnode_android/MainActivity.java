@@ -132,11 +132,11 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        mListAdapter.setTagVisable(false);
+        mListAdapter.setTagVisible(false);
 
         if (id == R.id.nav_all) {
             loadData("");
-            mListAdapter.setTagVisable(true);
+            mListAdapter.setTagVisible(true);
         } else if (id == R.id.nav_good) {
             loadData("good");
         } else if (id == R.id.nav_ask) {

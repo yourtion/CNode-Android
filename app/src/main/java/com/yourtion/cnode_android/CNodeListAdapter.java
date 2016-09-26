@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class CNodeListAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<Topic> mTopics;
-    private Boolean mTagVisable = true;
+    private Boolean mTagVisible = true;
 
     public CNodeListAdapter(Context context, ArrayList<Topic> topics) {
         this.mContext = context;
@@ -28,8 +28,8 @@ public class CNodeListAdapter extends BaseAdapter {
         mTopics = topics;
     }
 
-    public void setTagVisable(Boolean tagVisable) {
-        mTagVisable = tagVisable;
+    public void setTagVisible(Boolean tagVisible) {
+        mTagVisible = tagVisible;
     }
 
     @Override
@@ -61,7 +61,6 @@ public class CNodeListAdapter extends BaseAdapter {
             holder.author = (TextView) convertView.findViewById(R.id.list_item_author);
             holder.time = (TextView) convertView.findViewById(R.id.list_item_time);
 
-            // 将holder绑定到convertView
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -73,7 +72,7 @@ public class CNodeListAdapter extends BaseAdapter {
             holder.tab.setText(tab_string);
         }
 
-        if (mTagVisable && tab_string != null) {
+        if (mTagVisible && tab_string != null) {
             holder.tab.setVisibility(View.VISIBLE);
         } else {
             holder.tab.setVisibility(View.GONE);

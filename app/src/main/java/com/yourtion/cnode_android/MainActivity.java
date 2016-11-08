@@ -28,17 +28,18 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<Topic> mTopics;
     private CNodeListAdapter mListAdapter;
     private CNodeClient client = new CNodeClient();
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            return false;
         }
 
         return super.onOptionsItemSelected(item);
@@ -134,17 +135,32 @@ public class MainActivity extends AppCompatActivity
 
         mListAdapter.setTagVisible(false);
 
-        if (id == R.id.nav_all) {
-            loadData("");
-            mListAdapter.setTagVisible(true);
-        } else if (id == R.id.nav_good) {
-            loadData("good");
-        } else if (id == R.id.nav_ask) {
-            loadData("ask");
-        } else if (id == R.id.nav_job) {
-            loadData("job");
-        } else if (id == R.id.nav_share) {
-            loadData("share");
+        switch (id) {
+            case R.id.nav_good: {
+                loadData("good");
+                mToolbar.setTitle("CNode社区 - 精华");
+                break;
+            }
+            case R.id.nav_ask: {
+                loadData("ask");
+                mToolbar.setTitle("CNode社区 - 问答");
+                break;
+            }
+            case R.id.nav_job: {
+                loadData("job");
+                mToolbar.setTitle("CNode社区 - 招聘");
+                break;
+            }
+            case R.id.nav_share: {
+                loadData("share");
+                mToolbar.setTitle("CNode社区 - 分享");
+                break;
+            }
+            default: {
+                loadData("");
+                mListAdapter.setTagVisible(true);
+                mToolbar.setTitle("CNode社区");
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

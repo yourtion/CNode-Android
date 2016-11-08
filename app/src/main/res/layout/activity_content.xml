@@ -8,11 +8,15 @@
         android:id="@+id/text_view_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="10pt"
+        android:padding="8dp"
         android:layout_gravity="center_horizontal"
         android:text="Title"/>
 
     <thereisnospon.codeview.CodeView
         android:id="@+id/text_view_content"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </thereisnospon.codeview.CodeView>

@@ -67,7 +67,7 @@ public class CNodeClient {
         });
     }
 
-    public void getTopic(String id, final Callback callbak) {
+    public void getTopic(String id, final Callback callback) {
         Request request = new Request.Builder().
                 url(HOST + "/topic/" + id).
                 get().
@@ -85,10 +85,10 @@ public class CNodeClient {
                     JSONObject json = new JSONObject(resStr);
                     Topic topic = new Topic(json.getJSONObject("data"));
                     Log.d(TAG, topic.toString());
-                    callbak.success(topic);
+                    callback.success(topic);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    callbak.fail();
+                    callback.fail();
                 }
 
             }
